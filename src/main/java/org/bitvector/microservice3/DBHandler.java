@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-public class DBHandler implements ProductDAO {
+public class DBHandler implements ProductDAI {
 
     private Logger logger;
     private SessionFactory sessionFactory;
@@ -25,7 +25,7 @@ public class DBHandler implements ProductDAO {
 
         Configuration configuration = new Configuration()
                 .setProperties(new Properties(System.getProperties()))
-                .addAnnotatedClass(ProductEntity.class)                      // SUPER FUCKING IMPORTANT PER COLLECTION
+                .addAnnotatedClass(ProductEntity.class)      // SUPER FUCKING IMPORTANT PER COLLECTION
                 .configure();
         ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
                 .applySettings(configuration.getProperties()).build();

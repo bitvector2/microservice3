@@ -2,7 +2,7 @@ package org.bitvector.microservice3;
 
 import java.util.List;
 
-public interface ProductDAO {
+public interface ProductDAI {
     List<ProductEntity> getAllProducts();
 
     ProductEntity getProductById(Integer id);
