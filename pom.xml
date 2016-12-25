@@ -25,6 +25,22 @@
             <artifactId>slf4j-simple</artifactId>
             <version>1.7.22</version>
         </dependency>
+        <dependency>
+            <groupId>com.zaxxer</groupId>
+            <artifactId>HikariCP</artifactId>
+            <version>2.5.1</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>5.2.5.Final</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-hikaricp</artifactId>
+            <version>5.2.5.Final</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -43,7 +59,7 @@
                     <transformers>
                         <transformer
                                 implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                            <mainClass>org.bitvector.microservice3.HelloWorld</mainClass>
+                            <mainClass>org.bitvector.microservice3.HTTPHandler</mainClass>
                         </transformer>
                     </transformers>
                 </configuration>
