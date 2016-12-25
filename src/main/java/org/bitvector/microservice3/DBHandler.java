@@ -19,23 +19,21 @@ public class DBHandler implements ProductDAO {
     private Logger logger;
     private SessionFactory sessionFactory;
 
-    public void start() {
-        logger = LoggerFactory.getLogger("org.bitvector.microservice.DbHandler");
+    public DBHandler() {
+        logger = LoggerFactory.getLogger("org.bitvector.microservice3.DbHandler");
+        logger.info("Starting DBHandler...");
 
         Configuration configuration = new Configuration()
                 .setProperties(new Properties(System.getProperties()))
-                .addAnnotatedClass(ProductEntity.class)                         // SUPER FUCKING IMPORTANT PER COLLECTION
+                .addAnnotatedClass(ProductEntity.class)                      // SUPER FUCKING IMPORTANT PER COLLECTION
                 .configure();
         ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
                 .applySettings(configuration.getProperties()).build();
         sessionFactory = configuration.buildSessionFactory(serviceRegistry);
-
-        logger.info("Started a DbHandler...");
     }
 
-    public void stop() {
+    public void close() {
         sessionFactory.close();
-        logger.info("Stopped a DbHandler...");
     }
 
     @Override
