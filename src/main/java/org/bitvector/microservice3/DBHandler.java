@@ -56,17 +56,13 @@ public class DBHandler implements ProductDAI {
     @Override
     public ProductEntity getProductById(Integer id) {
         Session session = sessionFactory.openSession();
-        List products = session.createQuery("FROM ProductEntity WHERE id=:ID")
+        List objs = session.createQuery("FROM ProductEntity WHERE id=:ID")
                 .setParameter("ID", id)
                 .setCacheable(true)
                 .list();
         session.disconnect();
 
-        if (products.size() > 0) {
-            return (ProductEntity) products.get(0);
-        } else {
-            return null;
-        }
+        return (ProductEntity) objs.get(0);
     }
 
     @Override
