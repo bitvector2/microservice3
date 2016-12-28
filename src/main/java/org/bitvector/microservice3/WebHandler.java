@@ -5,6 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import static spark.Spark.get;
+import static spark.Spark.stop;
 
 public class WebHandler {
     private Logger logger;
@@ -27,5 +28,6 @@ public class WebHandler {
 
     public void close() {
         logger.info("Stopping WebHandler...");
+        stop();
     }
 }
