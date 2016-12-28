@@ -13,18 +13,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-public class DBHandler implements ProductDAI {
-
+public class DbHandler implements ProductDAI { // SUPER IMPORTANT PER ENTITY
     private Logger logger;
     private SessionFactory sessionFactory;
 
-    DBHandler() {
+    DbHandler() {
         logger = LoggerFactory.getLogger("org.bitvector.microservice3.DbHandler");
-        logger.info("Starting DBHandler...");
+        logger.info("Starting DbHandler...");
 
         Configuration configuration = new Configuration()
                 .setProperties(new Properties(System.getProperties()))
-                .addAnnotatedClass(ProductEntity.class) // SUPER FUCKING IMPORTANT PER COLLECTION
+                .addAnnotatedClass(ProductEntity.class) // SUPER IMPORTANT PER ENTITY
                 .configure();
 
         ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
@@ -34,7 +33,7 @@ public class DBHandler implements ProductDAI {
     }
 
     public void close() {
-        logger.info("Stopping DBHandler...");
+        logger.info("Stopping DbHandler...");
         sessionFactory.close();
     }
 

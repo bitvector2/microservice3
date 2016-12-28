@@ -50,4 +50,3 @@ public class ProductEntity implements Serializable {
         return "Product{" + "id=" + id + ", name='" + name + '\'' + '}';
     }
 }
-

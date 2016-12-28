@@ -69,7 +69,7 @@
                     <transformers>
                         <transformer
                                 implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                            <mainClass>org.bitvector.microservice3.HTTPHandler</mainClass>
+                            <mainClass>org.bitvector.microservice3.Main</mainClass>
                         </transformer>
                     </transformers>
                 </configuration>
