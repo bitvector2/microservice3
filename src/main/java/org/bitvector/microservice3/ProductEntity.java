@@ -8,21 +8,13 @@ import java.util.Objects;
 @Table(name = "products")
 public class ProductEntity implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "products_id_seq") // PostgreSQL naming convention
-    @SequenceGenerator(name = "products_id_seq", sequenceName = "products_id_seq", initialValue = 1, allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "products_id_seq") // Postgres naming convention
+    @SequenceGenerator(name = "products_id_seq", sequenceName = "products_id_seq", allocationSize = 1)
     @Column(name = "id")
     private Integer id;
 
     @Column(name = "name")
     private String name;
-
-    ProductEntity() {
-    }
-
-    ProductEntity(Integer id, String name) {
-        this.id = id;
-        this.name = name;
-    }
 
     public Integer getId() {
         return id;

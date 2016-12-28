@@ -1,6 +1,5 @@
 package org.bitvector.microservice3;
 
-
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -19,20 +18,23 @@ public class DBHandler implements ProductDAI {
     private Logger logger;
     private SessionFactory sessionFactory;
 
-    public DBHandler() {
+    DBHandler() {
         logger = LoggerFactory.getLogger("org.bitvector.microservice3.DbHandler");
         logger.info("Starting DBHandler...");
 
         Configuration configuration = new Configuration()
                 .setProperties(new Properties(System.getProperties()))
-                .addAnnotatedClass(ProductEntity.class)      // SUPER FUCKING IMPORTANT PER COLLECTION
+                .addAnnotatedClass(ProductEntity.class) // SUPER FUCKING IMPORTANT PER COLLECTION
                 .configure();
+
         ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
                 .applySettings(configuration.getProperties()).build();
+
         sessionFactory = configuration.buildSessionFactory(serviceRegistry);
     }
 
     public void close() {
+        logger.info("Stopping DBHandler...");
         sessionFactory.close();
     }
 
