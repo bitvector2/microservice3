@@ -16,7 +16,6 @@ public class WebHandler {
     WebHandler(DbHandler dbh) {
         logger = LoggerFactory.getLogger("org.bitvector.microservice3.WebHandler");
         logger.info("Starting WebHandler...");
-
         gson = new Gson();
         dbHandler = dbh;
 
@@ -49,21 +48,24 @@ public class WebHandler {
     private String putProductById(Request request, Response response) {
         response.status(200);
         response.type("application/json");
-        Integer id = Integer.parseInt(request.params(":ID"));
-        return gson.toJson(true);
+        ProductEntity product = gson.fromJson(request.body(), ProductEntity.class);
+        product.setId(Integer.parseInt(request.params(":ID")));
+        return gson.toJson(dbHandler.updateProduct(product));
     }
 
     private String postProduct(Request request, Response response) {
         response.status(200);
         response.type("application/json");
-        return gson.toJson(true);
+        ProductEntity product = gson.fromJson(request.body(), ProductEntity.class);
+        return gson.toJson(dbHandler.addProduct(product));
     }
 
     private String deleteProductById(Request request, Response response) {
         response.status(200);
         response.type("application/json");
-        Integer id = Integer.parseInt(request.params(":ID"));
-        return gson.toJson(true);
+        ProductEntity product = new ProductEntity();
+        product.setId(Integer.parseInt(request.params(":ID")));
+        return gson.toJson(dbHandler.deleteProduct(product));
     }
 
 }

@@ -7,9 +7,9 @@ public interface ProductDAI {
 
     ProductEntity getProductById(Integer id);
 
-    void addProduct(ProductEntity product);
+    Boolean addProduct(ProductEntity product);
 
-    void updateProduct(ProductEntity product);
+    Boolean updateProduct(ProductEntity product);
 
-    void deleteProduct(ProductEntity product);
+    Boolean deleteProduct(ProductEntity product);
 }

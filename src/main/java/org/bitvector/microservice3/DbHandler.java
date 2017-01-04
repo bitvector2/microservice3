@@ -65,29 +65,32 @@ public class DbHandler implements ProductDAI { // SUPER IMPORTANT PER ENTITY
     }
 
     @Override
-    public void addProduct(ProductEntity product) {
+    public Boolean addProduct(ProductEntity product) {
         Session session = sessionFactory.openSession();
         Transaction tx = session.beginTransaction();
         session.save(product);
         tx.commit();
         session.disconnect();
+        return true;
     }
 
     @Override
-    public void updateProduct(ProductEntity product) {
+    public Boolean updateProduct(ProductEntity product) {
         Session session = sessionFactory.openSession();
         Transaction tx = session.beginTransaction();
         session.update(product);
         tx.commit();
         session.disconnect();
+        return true;
     }
 
     @Override
-    public void deleteProduct(ProductEntity product) {
+    public Boolean deleteProduct(ProductEntity product) {
         Session session = sessionFactory.openSession();
         Transaction tx = session.beginTransaction();
         session.delete(product);
         tx.commit();
         session.disconnect();
+        return true;
     }
 }
