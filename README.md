@@ -4,4 +4,4 @@
 * Logback
 * Hibernate
 * HikariCP
-* Gson
+* Jackson

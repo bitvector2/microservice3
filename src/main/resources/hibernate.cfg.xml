@@ -8,6 +8,9 @@
         <property name="hibernate.connection.provider_class">
             org.hibernate.hikaricp.internal.HikariCPConnectionProvider
         </property>
+        <property name="hibernate.cache.region.factory_class">
+            hibernate.redis.cache.hibernate52.SingletonRedisRegionFactory
+        </property>
         <property name="hibernate.hikari.minimumIdle">2</property>
         <property name="hibernate.hikari.maximumPoolSize">10</property>
         <property name="hibernate.hikari.idleTimeout">30000</property>
