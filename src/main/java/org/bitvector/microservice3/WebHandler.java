@@ -57,7 +57,7 @@ public class WebHandler {
         response.status(200);
         response.type("application/json");
         ProductEntity product = gson.fromJson(request.body(), ProductEntity.class);
-        return gson.toJson(dbHandler.addProduct(product));
+        return gson.toJson(dbHandler.saveProduct(product));
     }
 
     private String deleteProductById(Request request, Response response) {

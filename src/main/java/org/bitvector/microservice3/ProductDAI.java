@@ -7,7 +7,7 @@ public interface ProductDAI {
 
     ProductEntity getProductById(Integer id);
 
-    Boolean addProduct(ProductEntity product);
+    Boolean saveProduct(ProductEntity product);
 
     Boolean updateProduct(ProductEntity product);
 

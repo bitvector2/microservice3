@@ -65,7 +65,7 @@ public class DbHandler implements ProductDAI { // SUPER IMPORTANT PER ENTITY
     }
 
     @Override
-    public Boolean addProduct(ProductEntity product) {
+    public Boolean saveProduct(ProductEntity product) {
         Session session = sessionFactory.openSession();
         Transaction tx = session.beginTransaction();
         session.save(product);
