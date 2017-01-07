@@ -4,5 +4,5 @@
 * Logback
 * Hibernate
 * HikariCP
-* Jackson
+* Gson
 * Hazelcast
