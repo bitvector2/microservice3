@@ -5,3 +5,4 @@
 * Hibernate
 * HikariCP
 * Jackson
+* Hazelcast
