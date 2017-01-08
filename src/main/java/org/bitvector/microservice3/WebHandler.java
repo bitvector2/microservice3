@@ -19,7 +19,8 @@ public class WebHandler {
         gson = new Gson();
         dbHandler = dbh;
 
-        // Route Wiring
+        ipAddress(System.getProperty("org.bitvector.microservice3.listen-address"));
+        port(Integer.parseInt(System.getProperty("org.bitvector.microservice3.listen-port")));
         get("/products", this::getAllProducts);
         get("/products/:ID", this::getProductById);
         put("/products/:ID", this::putProductById);
