@@ -8,16 +8,16 @@ import spark.Response;
 
 import static spark.Spark.*;
 
-public class WebHandler {
+public class HTTPHandler implements IClosable {
     private Logger logger;
     private Gson gson;
-    private DbHandler dbHandler;
+    private DBHandler dBHandler;
 
-    WebHandler(DbHandler dbh) {
-        logger = LoggerFactory.getLogger("org.bitvector.microservice3.WebHandler");
-        logger.info("Starting WebHandler...");
+    HTTPHandler(DBHandler dBHandler) {
+        logger = LoggerFactory.getLogger("org.bitvector.microservice3.HTTPHandler");
+        logger.info("Starting HTTPHandler...");
         gson = new Gson();
-        dbHandler = dbh;
+        this.dBHandler = dBHandler;
 
         ipAddress(System.getProperty("org.bitvector.microservice3.listen-address"));
         port(Integer.parseInt(System.getProperty("org.bitvector.microservice3.listen-port")));
@@ -29,21 +29,21 @@ public class WebHandler {
     }
 
     public void close() {
-        logger.info("Stopping WebHandler...");
+        logger.info("Stopping HTTPHandler...");
         stop();
     }
 
     private String getAllProducts(Request request, Response response) {
         response.status(200);
         response.type("application/json");
-        return gson.toJson(dbHandler.getAllProducts());
+        return gson.toJson(dBHandler.getAllProducts());
     }
 
     private String getProductById(Request request, Response response) {
         response.status(200);
         response.type("application/json");
         Integer id = Integer.parseInt(request.params(":ID"));
-        return gson.toJson(dbHandler.getProductById(id));
+        return gson.toJson(dBHandler.getProductById(id));
     }
 
     private String putProductById(Request request, Response response) {
@@ -51,14 +51,14 @@ public class WebHandler {
         response.type("application/json");
         ProductEntity product = gson.fromJson(request.body(), ProductEntity.class);
         product.setId(Integer.parseInt(request.params(":ID")));
-        return gson.toJson(dbHandler.updateProduct(product));
+        return gson.toJson(dBHandler.updateProduct(product));
     }
 
     private String postProduct(Request request, Response response) {
         response.status(200);
         response.type("application/json");
         ProductEntity product = gson.fromJson(request.body(), ProductEntity.class);
-        return gson.toJson(dbHandler.saveProduct(product));
+        return gson.toJson(dBHandler.saveProduct(product));
     }
 
     private String deleteProductById(Request request, Response response) {
@@ -66,6 +66,6 @@ public class WebHandler {
         response.type("application/json");
         ProductEntity product = new ProductEntity();
         product.setId(Integer.parseInt(request.params(":ID")));
-        return gson.toJson(dbHandler.deleteProduct(product));
+        return gson.toJson(dBHandler.deleteProduct(product));
     }
 }

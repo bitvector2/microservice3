@@ -4,8 +4,14 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-public class Main {
-    public static void main(String[] args) {
+public class Service implements IClosable {
+    private DBHandler dBHandler;
+    private HTTPHandler hTTPHandler;
+
+    Service() {
+        CloseThread closeThread = new CloseThread(this);
+        Runtime.getRuntime().addShutdownHook(closeThread);
+
         ClassLoader loader = Thread.currentThread().getContextClassLoader();
         try (InputStream resourceStream = loader.getResourceAsStream("microservice3.properties")) {
             Properties props = new Properties(System.getProperties());
@@ -15,11 +21,12 @@ public class Main {
             e.printStackTrace();
         }
 
-        DbHandler dbHandler = new DbHandler();
-        WebHandler webHandler = new WebHandler(dbHandler);
+        dBHandler = new DBHandler();
+        hTTPHandler = new HTTPHandler(this.dBHandler);
+    }
 
-        // webHandler.close();
-        // dbHandler.close();
-        // System.exit(0);
+    public void close() {
+        hTTPHandler.close();
+        dBHandler.close();
     }
 }

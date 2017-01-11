@@ -13,13 +13,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-public class DbHandler implements ProductDAI { // SUPER IMPORTANT PER ENTITY
+public class DBHandler implements IClosable, IProductDAO { // SUPER IMPORTANT PER ENTITY
     private Logger logger;
     private SessionFactory sessionFactory;
 
-    DbHandler() {
-        logger = LoggerFactory.getLogger("org.bitvector.microservice3.DbHandler");
-        logger.info("Starting DbHandler...");
+    DBHandler() {
+        logger = LoggerFactory.getLogger("org.bitvector.microservice3.DBHandler");
+        logger.info("Starting DBHandler...");
 
         Configuration configuration = new Configuration()
                 .setProperties(new Properties(System.getProperties()))
@@ -33,7 +33,7 @@ public class DbHandler implements ProductDAI { // SUPER IMPORTANT PER ENTITY
     }
 
     public void close() {
-        logger.info("Stopping DbHandler...");
+        logger.info("Stopping DBHandler...");
         sessionFactory.close();
     }
 
