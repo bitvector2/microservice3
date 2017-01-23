@@ -21,6 +21,7 @@ public class HTTPHandler implements IClosable {
 
         ipAddress(System.getProperty("org.bitvector.microservice3.listen-address"));
         port(Integer.parseInt(System.getProperty("org.bitvector.microservice3.listen-port")));
+        head("/test", this::test);
         get("/products", this::getAllProducts);
         get("/products/:ID", this::getProductById);
         put("/products/:ID", this::putProductById);
@@ -31,6 +32,12 @@ public class HTTPHandler implements IClosable {
     public void close() {
         logger.info("Stopping HTTPHandler...");
         stop();
+    }
+
+    private String test(Request request, Response response) {
+        response.status(200);
+        response.type("text/plain");
+        return "OK";
     }
 
     private String getAllProducts(Request request, Response response) {
