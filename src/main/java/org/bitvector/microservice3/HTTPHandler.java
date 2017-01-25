@@ -21,7 +21,7 @@ public class HTTPHandler implements IClosable {
 
         ipAddress(System.getProperty("org.bitvector.microservice3.listen-address"));
         port(Integer.parseInt(System.getProperty("org.bitvector.microservice3.listen-port")));
-        head("/test", this::test);
+        get("/test", this::test);
         get("/products", this::getAllProducts);
         get("/products/:ID", this::getProductById);
         put("/products/:ID", this::putProductById);
